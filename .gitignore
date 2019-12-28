@@ -1,0 +1,4 @@
+#Ignore user_guide
+user_guide/
+#Ignore assets
+assets/
