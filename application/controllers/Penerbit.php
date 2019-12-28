@@ -37,6 +37,6 @@ class Penerbit extends CI_Controller
   public function hapus($id)
   {
     $this->PenerbitModel->deletePenerbit($id);
-    $this->index();
+    echo "Delete Success";
   }
 }

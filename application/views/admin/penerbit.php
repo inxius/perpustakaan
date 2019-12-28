@@ -60,7 +60,7 @@
               <?php
               foreach ($dataPenerbit as $penerbit) {
                 ?>
-                <tr>
+                <tr id="<?php echo $penerbit->id; ?>">
                   <td><?php echo $penerbit->nama ?></td>
                   <td><?php echo $penerbit->telp ?></td>
                   <td><?php echo $penerbit->alamat ?></td>
@@ -71,11 +71,14 @@
                           <i class="fas fa-edit"></i>
                         </button>
                       </a>
-                      <a href="<?php echo site_url("penerbit/hapus/$penerbit->id"); ?>">
+                      <button type="button" class="btn btn-danger" id="hapus" name="button">
+                        <i class="fas fa-trash"></i>
+                      </button>
+                      <!-- <a href="<?php //echo site_url("penerbit/hapus/$penerbit->id"); ?>">
                         <button type="button" class="btn btn-danger" name="button">
                           <i class="fas fa-trash"></i>
                         </button>
-                      </a>
+                      </a> -->
                     </div>
                   </td>
                 </tr>
@@ -143,11 +146,30 @@
 <script src="<?php echo base_url('assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js') ?>"></script>
 
 <!-- bs-custom-file-input -->
-<script src="../../assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<script src="<?php echo base_url('assets/plugins/bs-custom-file-input/bs-custom-file-input.min.js') ?>"></script>
 
 <script>
 $(document).ready(function () {
   bsCustomFileInput.init();
+});
+
+$('#example1 tbody tr #hapus').click(function(){
+  // alert('aa');
+  var id = $(this).parents("tr").attr("id");
+  var base_url = '<?php echo site_url('penerbit/hapus/'); ?>';
+  if (confirm('Are you sure to remove this record ?')) {
+    $.ajax({
+      url: base_url+id,
+      type: 'DELETE',
+      error: function(){
+        alert('Something is wrong');
+      },
+      success: function(){
+        $("#"+id).remove();
+        alert("Record removed successfully");
+      }
+    });
+  }
 });
 
 $(function () {
@@ -157,6 +179,8 @@ $(function () {
 $('#myModal').on('shown.bs.modal', function () {
   $('#myInput').trigger('focus');
 });
+
+
 </script>
 </body>
 </html>
