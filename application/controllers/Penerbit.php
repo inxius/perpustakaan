@@ -18,7 +18,13 @@ class Penerbit extends CI_Controller
     $this->load->view('admin/penerbit', $data);
   }
 
-  public function tambah($value='')
+  public function getPenerbit($id)
+  {
+    $data['dataPenerbitById'] = $this->PenerbitModel->getPenerbitById($id);
+    echo json_encode($data);
+  }
+
+  public function tambah()
   {
     $nama = $this->input->post('nama');
     $telp = $this->input->post('telp');
@@ -31,7 +37,24 @@ class Penerbit extends CI_Controller
     );
 
     $this->PenerbitModel->addPenerbit($data);
-    $this->index();
+    header('location:'.site_url('penerbit'));
+  }
+
+  public function edit()
+  {
+    $id = $this->input->post('idPenerbit');
+    $nama = $this->input->post('nama');
+    $telp = $this->input->post('telp');
+    $alamat = $this->input->post('alamat');
+
+    $data = array(
+      'nama' => $nama,
+      'telp' => $telp,
+      'alamat' => $alamat
+    );
+
+    $this->PenerbitModel->editPenerbit($id, $data);
+    header('location:'.site_url('penerbit'));
   }
 
   public function hapus($id)

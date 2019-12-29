@@ -60,25 +60,19 @@
               <?php
               foreach ($dataPenerbit as $penerbit) {
                 ?>
-                <tr id="<?php echo $penerbit->id; ?>">
+                <tr id="<?php echo $penerbit->idPenerbit; ?>">
                   <td><?php echo $penerbit->nama ?></td>
                   <td><?php echo $penerbit->telp ?></td>
                   <td><?php echo $penerbit->alamat ?></td>
                   <td>
                     <div class="btn-group">
-                      <a href="#">
-                        <button type="button" class="btn btn-warning" name="button">
-                          <i class="fas fa-edit"></i>
-                        </button>
-                      </a>
+                      <button type="button" class="btn btn-warning" id="edit" name="button"
+                      data-toggle="modal" data-target="#modalEdit">
+                        <i class="fas fa-edit"></i>
+                      </button>
                       <button type="button" class="btn btn-danger" id="hapus" name="button">
                         <i class="fas fa-trash"></i>
                       </button>
-                      <!-- <a href="<?php //echo site_url("penerbit/hapus/$penerbit->id"); ?>">
-                        <button type="button" class="btn btn-danger" name="button">
-                          <i class="fas fa-trash"></i>
-                        </button>
-                      </a> -->
                     </div>
                   </td>
                 </tr>
@@ -108,7 +102,6 @@
         <div class="modal-body">
           <!-- form start -->
           <form role="form" action="<?php echo site_url('penerbit/tambah'); ?>" method="post">
-            <input type="hidden" name="aksi" value="ubah_profil">
             <div class="card-body">
               <div class="form-group">
                 <label for="inputNama">Nama</label>
@@ -134,6 +127,46 @@
       </div>
     </div>
   </div>
+
+
+  <!-- Modal for Edit -->
+  <div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Penerbit</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <!-- form start -->
+          <form role="form" action="<?php echo site_url('penerbit/edit'); ?>" method="post">
+            <input type="hidden" name="idPenerbit" id="idPenerbit" value="">
+            <div class="card-body">
+              <div class="form-group">
+                <label for="inputNama">Nama</label>
+                <input type="text" class="form-control" id="inputNama" name="nama" value="" required>
+              </div>
+              <div class="form-group">
+                <label for="inputTelp">Nomor Telpon</label>
+                <input type="text" class="form-control" id="inputTelp" name="telp" value="" required>
+              </div>
+              <div class="form-group">
+                <label for="inputAlamat">Alamat</label>
+                <textarea class="form-control" id="inputAlamat" name="alamat" aria-label="With textarea" required></textarea>
+              </div>
+            </div>
+            <!-- /.card-body -->
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Update</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <!-- /.content-wrapper -->
 
   <?php $this->load->view('assets/footer'); ?>
@@ -151,6 +184,28 @@
 <script>
 $(document).ready(function () {
   bsCustomFileInput.init();
+});
+
+$('#example1 tbody tr #edit').click(function(){
+  var id = $(this).parents("tr").attr("id");
+  var base_url = '<?php echo site_url('penerbit/getPenerbit/'); ?>';
+  $.ajax({
+    url: base_url+id,
+    type: 'GET',
+    dataType: 'json',
+    error: function(){
+      alert('Something is wrong');
+    },
+    success: function(data){
+      // $("#"+id).remove();
+      // console.log(data);
+      // alert(data.dataPenerbitById[0].alamat);
+      $('#modalEdit #idPenerbit').val(data.dataPenerbitById[0].idPenerbit);
+      $('#modalEdit #inputNama').val(data.dataPenerbitById[0].nama);
+      $('#modalEdit #inputTelp').val(data.dataPenerbitById[0].telp);
+      $('#modalEdit #inputAlamat').val(data.dataPenerbitById[0].alamat);
+    }
+  });
 });
 
 $('#example1 tbody tr #hapus').click(function(){

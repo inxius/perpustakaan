@@ -16,14 +16,26 @@ class PenerbitModel extends CI_Model
     return $this->db->get('penerbit')->result();
   }
 
+  function getPenerbitById($id)
+  {
+    $this->db->where('idPenerbit', $id);
+    return $this->db->get('penerbit')->result();
+  }
+
   function addPenerbit($data)
   {
     $this->db->insert('penerbit', $data);
   }
 
+  function editPenerbit($id, $data)
+  {
+    $this->db->where('idPenerbit', $id);
+    $this->db->update('penerbit', $data);
+  }
+
   function deletePenerbit($id)
   {
-    $this->db->where('id', $id);
+    $this->db->where('idPenerbit', $id);
     $this->db->delete('penerbit');
   }
 }
