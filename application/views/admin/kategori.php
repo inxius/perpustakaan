@@ -61,7 +61,7 @@
                 ?>
                 <tr id="<?php echo $kategori->idKategori; ?>">
                   <td><?php echo $kategori->idKategori ?></td>
-                  <td><?php echo $kategori->nama ?></td>
+                  <td><?php echo $kategori->namaKategori ?></td>
                   <td>
                     <div class="btn-group">
                       <button type="button" class="btn btn-warning" id="edit" name="button"
@@ -92,7 +92,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah Penerbit</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Tambah Kategori</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -123,7 +123,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah Penerbit</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Edit Kategori</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -179,7 +179,7 @@ $('#example1 tbody tr #edit').click(function(){
     },
     success: function(data){
       $('#modalEdit #idKategori').val(data.dataKategoriById[0].idKategori);
-      $('#modalEdit #inputNama').val(data.dataKategoriById[0].nama);
+      $('#modalEdit #inputNama').val(data.dataKategoriById[0].namaKategori);
     }
   });
 });

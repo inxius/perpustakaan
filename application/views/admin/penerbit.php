@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Blank Page</title>
+  <title>Perpustakaan | Penerbit</title>
   <?php $this->load->view('assets/st'); ?>
 </head>
 <body class="hold-transition sidebar-mini">
@@ -61,7 +61,7 @@
               foreach ($dataPenerbit as $penerbit) {
                 ?>
                 <tr id="<?php echo $penerbit->idPenerbit; ?>">
-                  <td><?php echo $penerbit->nama ?></td>
+                  <td><?php echo $penerbit->namaPenerbit ?></td>
                   <td><?php echo $penerbit->telp ?></td>
                   <td><?php echo $penerbit->alamat ?></td>
                   <td>
@@ -134,7 +134,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Tambah Penerbit</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Edit Penerbit</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -201,7 +201,7 @@ $('#example1 tbody tr #edit').click(function(){
       // console.log(data);
       // alert(data.dataPenerbitById[0].alamat);
       $('#modalEdit #idPenerbit').val(data.dataPenerbitById[0].idPenerbit);
-      $('#modalEdit #inputNama').val(data.dataPenerbitById[0].nama);
+      $('#modalEdit #inputNama').val(data.dataPenerbitById[0].namaPenerbit);
       $('#modalEdit #inputTelp').val(data.dataPenerbitById[0].telp);
       $('#modalEdit #inputAlamat').val(data.dataPenerbitById[0].alamat);
     }

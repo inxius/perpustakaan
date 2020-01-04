@@ -9,6 +9,7 @@ class Penerbit extends CI_Controller
   function __construct()
   {
     parent::__construct();
+    $this->load->model('PenerbitModel');
     // code...
   }
 
@@ -31,7 +32,7 @@ class Penerbit extends CI_Controller
     $alamat = $this->input->post('alamat');
 
     $data = array(
-      'nama' => $nama,
+      'namaPenerbit' => $nama,
       'telp' => $telp,
       'alamat' => $alamat
     );
@@ -48,7 +49,7 @@ class Penerbit extends CI_Controller
     $alamat = $this->input->post('alamat');
 
     $data = array(
-      'nama' => $nama,
+      'namaPenerbit' => $nama,
       'telp' => $telp,
       'alamat' => $alamat
     );

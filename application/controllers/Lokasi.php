@@ -9,6 +9,7 @@ class Lokasi extends CI_Controller
   function __construct()
   {
     parent::__construct();
+    $this->load->model('LokasiModel');
     // code...
   }
 
@@ -29,7 +30,7 @@ class Lokasi extends CI_Controller
     $nama = $this->input->post('nama');
 
     $data = array(
-      'nama' => $nama
+      'namaLokasi' => $nama
     );
 
     $this->LokasiModel->addLokasi($data);
@@ -42,7 +43,7 @@ class Lokasi extends CI_Controller
     $nama = $this->input->post('nama');
 
     $data = array(
-      'nama' => $nama
+      'namaLokasi' => $nama
     );
 
     $this->LokasiModel->editLokasi($id, $data);

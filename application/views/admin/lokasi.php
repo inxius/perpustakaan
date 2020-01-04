@@ -61,7 +61,7 @@
                 ?>
                 <tr id="<?php echo $lokasi->idLokasi; ?>">
                   <td><?php echo $lokasi->idLokasi ?></td>
-                  <td><?php echo $lokasi->nama ?></td>
+                  <td><?php echo $lokasi->namaLokasi ?></td>
                   <td>
                     <div class="btn-group">
                       <button type="button" class="btn btn-warning" id="edit" name="button"
@@ -179,7 +179,7 @@ $('#example1 tbody tr #edit').click(function(){
     },
     success: function(data){
       $('#modalEdit #idLokasi').val(data.dataLokasiById[0].idLokasi);
-      $('#modalEdit #inputNama').val(data.dataLokasiById[0].nama);
+      $('#modalEdit #inputNama').val(data.dataLokasiById[0].namaLokasi);
     }
   });
 });

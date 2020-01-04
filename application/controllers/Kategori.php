@@ -9,6 +9,7 @@ class Kategori extends CI_Controller
   function __construct()
   {
     parent::__construct();
+    $this->load->model('KategoriModel');
     // code...
   }
 
@@ -29,7 +30,7 @@ class Kategori extends CI_Controller
     $nama = $this->input->post('nama');
 
     $data = array(
-      'nama' => $nama
+      'namaKategori' => $nama
     );
 
     $this->KategoriModel->addKategori($data);
@@ -42,7 +43,7 @@ class Kategori extends CI_Controller
     $nama = $this->input->post('nama');
 
     $data = array(
-      'nama' => $nama
+      'namaKategori' => $nama
     );
 
     $this->KategoriModel->editKategori($id, $data);
