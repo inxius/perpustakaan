@@ -58,6 +58,7 @@
                 <th>Penerbit</th>
                 <th>Kategori</th>
                 <th>Lokasi</th>
+                <th>Aksi</th>
               </tr>
             </thead>
             <tbody>
