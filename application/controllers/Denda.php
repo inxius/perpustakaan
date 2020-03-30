@@ -15,8 +15,13 @@ class Denda extends CI_Controller
 
   public function index()
   {
-    $data['dataDenda'] = $this->DendaModel->getDenda();
-    $this->load->view('admin/denda', $data);
+    if ($this->session->userdata('login') == true) {
+      $data['dataDenda'] = $this->DendaModel->getDenda();
+      $this->load->view('admin/denda', $data);
+    }
+    else {
+      $this->loginPage();
+    }
   }
 
   public function ubah()
@@ -28,6 +33,12 @@ class Denda extends CI_Controller
     );
 
     $this->DendaModel->editDenda($id, $data);
-    header('location:'.site_url('denda'));
+    // header('location:'.site_url('denda'));
+    $this->index();
+  }
+
+  function loginPage()
+  {
+    $this->load->view('admin/login');
   }
 }

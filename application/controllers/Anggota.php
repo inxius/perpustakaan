@@ -15,8 +15,13 @@ class Anggota extends CI_Controller
 
   public function index()
   {
-    $data['dataAnggota'] = $this->AnggotaModel->getAnggota();
-    $this->load->view('admin/anggota', $data);
+    if ($this->session->userdata('login') == true) {
+      $data['dataAnggota'] = $this->AnggotaModel->getAnggota();
+      $this->load->view('admin/anggota', $data);
+    }
+    else {
+      $this->loginPage();
+    }
   }
 
   public function getAnggota($id)
@@ -59,5 +64,10 @@ class Anggota extends CI_Controller
   {
     $this->AnggotaModel->deleteAnggota($id);
     echo "Delete Success";
+  }
+
+  function loginPage()
+  {
+    $this->load->view('admin/login');
   }
 }

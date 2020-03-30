@@ -15,8 +15,13 @@ class Penerbit extends CI_Controller
 
   public function index()
   {
-    $data['dataPenerbit'] = $this->PenerbitModel->getPenerbit();
-    $this->load->view('admin/penerbit', $data);
+    if ($this->session->userdata('login') == true) {
+      $data['dataPenerbit'] = $this->PenerbitModel->getPenerbit();
+      $this->load->view('admin/penerbit', $data);
+    }
+    else {
+      $this->loginPage();
+    }
   }
 
   public function getPenerbit($id)
@@ -38,7 +43,8 @@ class Penerbit extends CI_Controller
     );
 
     $this->PenerbitModel->addPenerbit($data);
-    header('location:'.site_url('penerbit'));
+    // header('location:'.site_url('penerbit'));
+    $this->index();
   }
 
   public function edit()
@@ -55,12 +61,18 @@ class Penerbit extends CI_Controller
     );
 
     $this->PenerbitModel->editPenerbit($id, $data);
-    header('location:'.site_url('penerbit'));
+    // header('location:'.site_url('penerbit'));
+    $this->index();
   }
 
   public function hapus($id)
   {
     $this->PenerbitModel->deletePenerbit($id);
     echo "Delete Success";
+  }
+
+  function loginPage()
+  {
+    $this->load->view('admin/login');
   }
 }

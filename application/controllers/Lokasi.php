@@ -15,8 +15,13 @@ class Lokasi extends CI_Controller
 
   public function index()
   {
-    $data['dataLokasi'] = $this->LokasiModel->getLokasi();
-    $this->load->view('admin/lokasi', $data);
+    if ($this->session->userdata('login') == true) {
+      $data['dataLokasi'] = $this->LokasiModel->getLokasi();
+      $this->load->view('admin/lokasi', $data);
+    }
+    else {
+      $this->loginPage();
+    }
   }
 
   public function getLokasi($id)
@@ -34,7 +39,8 @@ class Lokasi extends CI_Controller
     );
 
     $this->LokasiModel->addLokasi($data);
-    header('location:'.site_url('lokasi'));
+    // header('location:'.site_url('lokasi'));
+    $this->index();
   }
 
   public function edit()
@@ -47,12 +53,18 @@ class Lokasi extends CI_Controller
     );
 
     $this->LokasiModel->editLokasi($id, $data);
-    header('location:'.site_url('lokasi'));
+    // header('location:'.site_url('lokasi'));
+    $this->index();
   }
 
   public function hapus($id)
   {
     $this->LokasiModel->deleteLokasi($id);
     echo "Delete Success";
+  }
+
+  function loginPage()
+  {
+    $this->load->view('admin/login');
   }
 }

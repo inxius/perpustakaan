@@ -15,20 +15,30 @@ class Buku extends CI_Controller
 
   public function index()
   {
-    $data['dataBuku'] = $this->BukuModel->getBuku();
-    $data['dataPenerbit'] = $this->PenerbitModel->getPenerbit();
-    $data['dataKategori'] = $this->KategoriModel->getKategori();
-    $data['dataLokasi'] = $this->LokasiModel->getLokasi();
-    $this->load->view('admin/buku', $data);
+    if ($this->session->userdata('login') == true) {
+      $data['dataBuku'] = $this->BukuModel->getBuku();
+      $data['dataPenerbit'] = $this->PenerbitModel->getPenerbit();
+      $data['dataKategori'] = $this->KategoriModel->getKategori();
+      $data['dataLokasi'] = $this->LokasiModel->getLokasi();
+      $this->load->view('admin/buku', $data);
+    }
+    else {
+      $this->loginPage();
+    }
   }
 
   public function detailBuku($id)
   {
-    $data['dataBuku'] = $this->BukuModel->getBukuById($id);
-    $data['dataPenerbit'] = $this->PenerbitModel->getPenerbit();
-    $data['dataKategori'] = $this->KategoriModel->getKategori();
-    $data['dataLokasi'] = $this->LokasiModel->getLokasi();
-    $this->load->view('admin/bukuDetail', $data);
+    if ($this->session->userdata('login') == true) {
+      $data['dataBuku'] = $this->BukuModel->getBukuById($id);
+      $data['dataPenerbit'] = $this->PenerbitModel->getPenerbit();
+      $data['dataKategori'] = $this->KategoriModel->getKategori();
+      $data['dataLokasi'] = $this->LokasiModel->getLokasi();
+      $this->load->view('admin/bukuDetail', $data);
+    }
+    else {
+      $this->loginPage();
+    }
   }
 
   public function tambah()
@@ -142,5 +152,10 @@ class Buku extends CI_Controller
   {
     $this->BukuModel->deleteBuku($id);
     echo "Delete Success";
+  }
+
+  function loginPage()
+  {
+    $this->load->view('admin/login');
   }
 }

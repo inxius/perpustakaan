@@ -15,7 +15,15 @@ class Admin extends CI_Controller
 
   public function index()
   {
-    $this->load->view('admin/login');
+    if ($this->session->userdata('login') == null) {
+      $this->loginPage();
+    }
+    elseif ($this->session->userdata('login') == true) {
+      $this->home();
+    }
+    else {
+      echo "string";
+    }
   }
 
   public function login()
@@ -30,7 +38,9 @@ class Admin extends CI_Controller
         $pass = $key->password;
       }
       if (password_verify($password, $pass)) {
-        $this->home();
+        $this->session->set_userdata('login', true);
+        $this->session->set_userdata('username', $username);
+        $this->index();
       }
       else {
         echo "string";
@@ -38,8 +48,24 @@ class Admin extends CI_Controller
     }
   }
 
-  public function home()
+  public function logout()
   {
-    $this->load->view('admin/home');
+    $this->session->sess_destroy();
+    $this->loginPage();
+  }
+
+  function home()
+  {
+    if ($this->session->userdata('login') == true) {
+      $this->load->view('admin/home');
+    }
+    else {
+      $this->loginPage();
+    }
+  }
+
+  function loginPage()
+  {
+    $this->load->view('admin/login');
   }
 }

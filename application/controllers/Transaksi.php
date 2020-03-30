@@ -15,10 +15,15 @@ class Transaksi extends CI_Controller
 
   public function index()
   {
-    $data['dataTransaksi'] = $this->TransaksiModel->getTransasiAktif();
-    $data['dataAnggota'] = $this->AnggotaModel->getAnggota();
-    $data['dataBuku'] = $this->BukuModel->getBuku();
-    $this->load->view('admin/transaksiAktif', $data);
+    if ($this->session->userdata('login') == true) {
+      $data['dataTransaksi'] = $this->TransaksiModel->getTransasiAktif();
+      $data['dataAnggota'] = $this->AnggotaModel->getAnggota();
+      $data['dataBuku'] = $this->BukuModel->getBuku();
+      $this->load->view('admin/transaksiAktif', $data);
+    }
+    else {
+      $this->loginPage();
+    }
   }
 
   public function pinjam()
@@ -30,7 +35,8 @@ class Transaksi extends CI_Controller
       'statusPinjam' => 'pinjam'
     );
     $this->TransaksiModel->transaksiPinjam($data);
-    header('location:'.site_url('transaksi'));
+    // header('location:'.site_url('transaksi'));
+    $this->index();
   }
 
   public function kembali()
@@ -42,7 +48,8 @@ class Transaksi extends CI_Controller
       'statusPinjam' => "kembali",
     );
     $this->TransaksiModel->transaksiKembali($id, $data);
-    header('location:'.site_url('transaksi'));
+    // header('location:'.site_url('transaksi'));
+    $this->index();
   }
 
   public function getDetailPinjam($id)
@@ -88,5 +95,10 @@ class Transaksi extends CI_Controller
     else {
       return 0;
     }
+  }
+
+  function loginPage()
+  {
+    $this->load->view('admin/login');
   }
 }
