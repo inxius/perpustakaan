@@ -40,11 +40,11 @@
         <div class="card-body p-5">
           <h1 class="font-weight-light text-center">Katalog Simple Perpustakaan</h1>
           <br><hr>
-          <form class="" action="index.html" method="post">
+          <form class="" action="<?php echo site_url('katalog/search'); ?>" method="post">
             <div class="input-group input-group-lg">
-              <input type="text" class="form-control" placeholder="Judul Buku" required>
+              <input type="text" class="form-control" name="judul" placeholder="Judul Buku, Pengarang" required>
               <span class="input-group-append">
-                <button type="button" class="btn btn-info btn-flat">Search</button>
+                <button type="submit" class="btn btn-info btn-flat">Search</button>
               </span>
             </div>
           </form>

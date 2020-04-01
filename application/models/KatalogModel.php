@@ -18,6 +18,15 @@ class KatalogModel extends CI_Model
     return $this->db->get()->result();
   }
 
+  function searchKatalog($key)
+  {
+    $this->db->select('buku.idBuku, buku.kode, buku.judul, buku.pengarang');
+    $this->db->from('buku');
+    $this->db->like('buku.judul', $key);
+    $this->db->or_like('buku.pengarang', $key);
+    return $this->db->get()->result();
+  }
+
   function getDetailKatalog($id)
   {
     $this->db->select('buku.idBuku, buku.kode, buku.judul, buku.pengarang, penerbit.namaPenerbit, kategori.namaKategori, lokasi.namaLokasi, bukuDetail.isbn, bukuDetail.tahunTerbit, bukuDetail.jmlHal, bukuDetail.deskripsi');
