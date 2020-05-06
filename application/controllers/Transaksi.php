@@ -35,8 +35,8 @@ class Transaksi extends CI_Controller
       'statusPinjam' => 'pinjam'
     );
     $this->TransaksiModel->transaksiPinjam($data);
-    // header('location:'.site_url('transaksi'));
-    $this->index();
+    header('location:'.site_url('transaksi'));
+    // $this->index();
   }
 
   public function kembali()
@@ -48,8 +48,8 @@ class Transaksi extends CI_Controller
       'statusPinjam' => "kembali",
     );
     $this->TransaksiModel->transaksiKembali($id, $data);
-    // header('location:'.site_url('transaksi'));
-    $this->index();
+    header('location:'.site_url('transaksi'));
+    // $this->index();
   }
 
   public function getDetailPinjam($id)

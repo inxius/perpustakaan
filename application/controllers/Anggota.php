@@ -34,7 +34,7 @@ class Anggota extends CI_Controller
   {
     $data = array(
       'nomorAnggota' => $this->input->post('nomorAnggota'),
-      'nik' => $this->input->post('nik'),
+      // 'nik' => $this->input->post('nik'),
       'namaAnggota' => $this->input->post('nama'),
       'jk' => $this->input->post('jk'),
       'alamat' => $this->input->post('alamat'),
@@ -50,7 +50,7 @@ class Anggota extends CI_Controller
 
     $data = array(
       'nomorAnggota' => $this->input->post('nomorAnggota'),
-      'nik' => $this->input->post('nik'),
+      // 'nik' => $this->input->post('nik'),
       'namaAnggota' => $this->input->post('nama'),
       'jk' => $this->input->post('jk'),
       'alamat' => $this->input->post('alamat'),

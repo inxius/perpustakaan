@@ -36,10 +36,11 @@ class Kategori extends CI_Controller
     $data = array(
       'namaKategori' => $nama
     );
-
+    print_r($data);
+    
     $this->KategoriModel->addKategori($data);
-    // header('location:'.site_url('kategori'));
-    $this->index();
+    header('location:'.site_url('kategori'));
+    // $this->index();
   }
 
   public function edit()

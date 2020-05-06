@@ -41,6 +41,13 @@ class Buku extends CI_Controller
     }
   }
 
+  public function lastId()
+  {
+    $data = $this->BukuModel->getLastID();
+
+    echo $data;
+  }
+
   public function tambah()
   {
     $kodeBuku = $this->input->post('kodeBuku');
@@ -70,8 +77,9 @@ class Buku extends CI_Controller
 
     if ( ! $this->upload->do_upload('gambarBuku')){
       $error = array('error' => $this->upload->display_errors());
+      print_r($error);
       // $this->load->view('admin/tes', $error);
-      header('location:'.site_url('buku'));
+      // header('location:'.site_url('buku'));
     }else{
       $data = array('upload_data' => $this->upload->data());
       // $this->load->view('admin/tes', $data);

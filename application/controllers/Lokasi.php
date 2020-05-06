@@ -39,8 +39,8 @@ class Lokasi extends CI_Controller
     );
 
     $this->LokasiModel->addLokasi($data);
-    // header('location:'.site_url('lokasi'));
-    $this->index();
+    header('location:'.site_url('lokasi'));
+    // $this->index();
   }
 
   public function edit()
