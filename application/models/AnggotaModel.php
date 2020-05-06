@@ -24,6 +24,7 @@ class AnggotaModel extends CI_Model
 
   function addAnggota($data)
   {
+    $this->db->set('idAnggota', 'UUID()', FALSE);
     $this->db->insert('anggota', $data);
   }
 

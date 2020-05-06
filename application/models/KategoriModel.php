@@ -24,6 +24,7 @@ class KategoriModel extends CI_Model
 
   function addKategori($data)
   {
+    $this->db->set('idKategori', 'UUID()', FALSE);
     $this->db->insert('kategori', $data);
   }
 

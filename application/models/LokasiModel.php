@@ -24,6 +24,7 @@ class LokasiModel extends CI_Model
 
   function addLokasi($data)
   {
+    $this->db->set('idLokasi', 'UUID()', FALSE);
     $this->db->insert('lokasi', $data);
   }
 

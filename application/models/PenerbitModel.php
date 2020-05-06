@@ -24,6 +24,7 @@ class PenerbitModel extends CI_Model
 
   function addPenerbit($data)
   {
+    $this->db->set('idPenerbit', 'UUID()', FALSE);
     $this->db->insert('penerbit', $data);
   }
 

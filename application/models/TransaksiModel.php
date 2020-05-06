@@ -70,6 +70,7 @@ class TransaksiModel extends CI_Model
 
   function transaksiPinjam($data)
   {
+    $this->db->set('idTransaksi', 'UUID()', FALSE);
     $this->db->insert('transaksi', $data);
   }
 

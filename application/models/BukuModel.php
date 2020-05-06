@@ -30,10 +30,21 @@ class BukuModel extends CI_Model
     return $this->db->get()->result();
   }
 
+  function getLastID()
+  {
+    $this->db->select('idBuku');
+    $this->db->from('buku');
+    $this->db->order_by("idBuku", "DESC");
+    $this->db->limit(1);
+    foreach ($this->db->get()->result() as $key) {
+      $id = $key->idBuku;
+    }
+    return $id;
+  }
+
   function addBuku($data)
   {
     $dataBuku = array(
-      'idBuku' => '',
       'kode' => $data['kodeBuku'],
       'judul' => $data['judulBuku'],
       'pengarang' => $data['pengarang'],
@@ -42,12 +53,12 @@ class BukuModel extends CI_Model
       'idLokasi' => $data['lokasi']
     );
 
+    $this->db->set('idBuku', 'UUID()', FALSE);
     $bukuInsert = $this->db->insert('buku', $dataBuku);
 
     if ($bukuInsert) {
       $dataDetail = array(
-        'idDetailBuku' => '',
-        'idBuku' => $this->db->insert_id(),
+        'idBuku' => $this->getLastID(),
         'tahunTerbit' => $data['tahun'],
         'isbn' => $data['isbn'],
         'jmlHal' => $data['jmlHal'],
@@ -56,6 +67,7 @@ class BukuModel extends CI_Model
         'gambar' => $data['picture']
       );
 
+      $this->db->set('idDetailBuku', 'UUID()', FALSE);
       $detailInsert = $this->db->insert('bukuDetail', $dataDetail);
     }
     else {
