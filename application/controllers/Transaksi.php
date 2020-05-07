@@ -44,7 +44,8 @@ class Transaksi extends CI_Controller
     $id = $this->input->post('idTransaksi');
     $data = array(
       'tglKembali' => $this->input->post('tglKembali'),
-      'denda' => $this->input->post('denda'),
+      // 'denda' => $this->input->post('denda'),
+      'denda' => $this->denda($id),
       'statusPinjam' => "kembali",
     );
     $this->TransaksiModel->transaksiKembali($id, $data);
@@ -90,7 +91,7 @@ class Transaksi extends CI_Controller
     }
 
     if ($a > $maxHari) {
-      return $a * $denda;
+      return ($a - $maxHari) * $denda;
     }
     else {
       return 0;
