@@ -51,7 +51,7 @@ class Buku extends CI_Controller
   public function tambah()
   {
     $kodeBuku = $this->input->post('kodeBuku');
-    $picture = $kodeBuku.'-'.bin2hex(random_bytes(5));
+    $picture = $kodeBuku.'-'.bin2hex(random_bytes(5)).'.jpeg';
 
     $dataInsert = array(
       'kodeBuku' => $kodeBuku,
@@ -69,7 +69,7 @@ class Buku extends CI_Controller
     );
 
     $config['upload_path']          = './assets/img/';
-    $config['allowed_types']        = 'png';
+    $config['allowed_types']        = 'jpeg';
     $config['file_name']            = $picture;
     $config['max_size']             = 10000;
 
