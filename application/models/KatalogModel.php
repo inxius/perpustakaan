@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
@@ -29,7 +29,7 @@ class KatalogModel extends CI_Model
 
   function getDetailKatalog($id)
   {
-    $this->db->select('buku.idBuku, buku.kode, buku.judul, buku.pengarang, penerbit.namaPenerbit, kategori.namaKategori, lokasi.namaLokasi, bukuDetail.isbn, bukuDetail.tahunTerbit, bukuDetail.jmlHal, bukuDetail.deskripsi');
+    $this->db->select('buku.idBuku, buku.kode, buku.judul, buku.pengarang, penerbit.namaPenerbit, kategori.namaKategori, lokasi.namaLokasi, bukuDetail.isbn, bukuDetail.tahunTerbit, bukuDetail.jmlHal, bukuDetail.deskripsi, bukuDetail.gambar');
     $this->db->from('buku');
     $this->db->join('bukuDetail', 'buku.idBuku = bukuDetail.idBuku');
     $this->db->join('penerbit', 'buku.idPenerbit = penerbit.idPenerbit');
