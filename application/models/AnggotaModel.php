@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
@@ -9,6 +9,11 @@ class AnggotaModel extends CI_Model
   function __construct()
   {
     // code...
+  }
+
+  function countAnggota()
+  {
+    return $this->db->count_all('anggota');
   }
 
   function getAnggota()

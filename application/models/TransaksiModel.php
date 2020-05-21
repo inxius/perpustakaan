@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
@@ -9,6 +9,12 @@ class TransaksiModel extends CI_Model
   function __construct()
   {
     // code...
+  }
+
+  function countTransaksiAktif()
+  {
+    $this->db->where('statusPinjam', 'pinjam');
+    return $this->db->count_all_results('transaksi', FALSE);
   }
 
   function getTransasiAktif()

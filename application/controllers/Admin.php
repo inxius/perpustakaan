@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
@@ -10,18 +10,23 @@ class Admin extends CI_Controller
   {
     // code...
     parent::__construct();
-    // $this->load->helper('url');
+    $this->load->model(array(
+      'BukuModel',
+      'AnggotaModel',
+      'TransaksiModel',
+    ));
   }
 
   public function index()
   {
     if ($this->session->userdata('login') == null) {
       $this->loginPage();
-    }
-    elseif ($this->session->userdata('login') == true) {
-      $this->home();
-    }
-    else {
+    } elseif ($this->session->userdata('login') == true) {
+      $data['buku'] = $this->BukuModel->countBuku();
+      $data['anggota'] = $this->AnggotaModel->countAnggota();
+      $data['transaksi'] = $this->TransaksiModel->countTransaksiAktif();
+      $this->load->view('admin/home', $data);
+    } else {
       echo "string";
     }
   }
@@ -41,8 +46,7 @@ class Admin extends CI_Controller
         $this->session->set_userdata('login', true);
         $this->session->set_userdata('username', $username);
         $this->index();
-      }
-      else {
+      } else {
         echo "string";
       }
     }
@@ -58,8 +62,7 @@ class Admin extends CI_Controller
   {
     if ($this->session->userdata('login') == true) {
       $this->load->view('admin/home');
-    }
-    else {
+    } else {
       $this->loginPage();
     }
   }

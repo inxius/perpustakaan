@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 /**
  *
  */
@@ -9,6 +9,11 @@ class BukuModel extends CI_Model
   function __construct()
   {
     // code...
+  }
+
+  function countBuku()
+  {
+    return $this->db->count_all('buku');
   }
 
   function getBuku()
@@ -69,8 +74,7 @@ class BukuModel extends CI_Model
 
       $this->db->set('idDetailBuku', 'UUID()', FALSE);
       $detailInsert = $this->db->insert('bukuDetail', $dataDetail);
-    }
-    else {
+    } else {
       echo "something error";
     }
   }
@@ -83,8 +87,7 @@ class BukuModel extends CI_Model
     if ($updateBuku) {
       $this->db->where('idBuku', $idBuku);
       $updateDetail = $this->db->update('bukuDetail', $dataDetail);
-    }
-    else {
+    } else {
       echo "something error";
     }
   }
